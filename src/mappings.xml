@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<!-- <configuration> <stop-on-errors>true</stop-on-errors> <date-format>MM/dd/yyyy 
+		HH:mm</date-format> <wildcard>true</wildcard> </configuration> -->
+	<configuration>
+		<date-format>MM/dd/yyyy HH:mm</date-format>
+
+		<custom-converters> <!-- these are always bi-directional -->
+			<converter type="converter.AddressConverter">
+				<class-a>dto.Location</class-a>
+				<class-b>model.AddressDetail</class-b>
+			</converter>
+		</custom-converters>
+
+		<variables>
+			<variable name="type_name">dto.Employee
+			</variable>
+		</variables>
+	</configuration>
+	<mapping>
+		<class-a>model.EmployeeDetails</class-a>
+		<class-b>${type_name}</class-b>
+		<field>
+			<a>eid</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>addressDetail</a>
+			<b>location</b>
+		</field>
+		<field>
+			<!-- dozer can automatically interconvert date and string you only need 
+				to declare this if you want to override default date format -->
+			<a date-format="MM/dd/yyyy --HH:mm:ss">dob</a>
+			<b>dob</b>
+		</field>
+	</mapping>
+	<!-- <mapping wildcard="false"> The wildcard attribute is set to true by 
+		default. This means that it will automatically try to map every property 
+		in the two objects. When the attribute is set to false it will only map explicitly 
+		defined fields. -->
+
+
+
+</mappings>
